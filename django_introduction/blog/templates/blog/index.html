@@ -22,19 +22,40 @@
             <div class="body-main">
                 {% for article in article_list %}
                 <div>
-                    <h2>{{ article.title }}</h2>
+                    <h2><a href="/blog/detail/{{article.article_id}}"> {{ article.title }}</a></h2>
                     <p>
                          {{ article.brief_content}}
                     </p>
                 </div>
                 {% endfor %}
             </div>
+            <div class="body-footer">
+                <div class="col-md-4 col-md-offset-3">     <!-- body-main占用了9格，分页按钮在body-main中占用4格并偏移3格达到居中效果 -->
+                <nav aria-label="Page navigation">
+                 <ul class="pagination">
+                     <li>
+                        <a href="/blog/index?page={{previous}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                     </li>
+                     {% for num in page_num %}
+                     <li><a href="/blog/index?page={{num}}">{{ num }}</a></li>
+                     {% endfor %}
+                     <li>
+                        <a href="/blog/inde?page={{next_page}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                     </li>
+                 </ul>
+                </nav>
+                </div>
+            </div>
         </div>
         <div class="col-md-3" role="complementary">
             <div>
                 <h2>最新文章</h2>
-                {% for  article in article_list %}
-                <h4><a href="#">{{ article.title }}</a></h4>
+                {% for  article in top5_article_list %}
+                <h4><a href="/blog/detail/{{article.article_id}}">{{ article.title }}</a></h4>
                 {% endfor %}
             </div>
         </div>
